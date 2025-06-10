@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\GeneralInfo;
 use Illuminate\Support\Facades\DB;
 use App\Models\Information;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class AllRoutes extends Controller
@@ -51,12 +52,15 @@ class AllRoutes extends Controller
           ]);
           $queryinfo->save();
         }
+        $referenceid = Str::uuid();
+
         $date  = Carbon::now()->setTimeZone('Africa/Lagos')->format('Y,m D h:i:a A');
         $querygeneral = new GeneralInfo([
             'fullname' => $request->input('fullname'), 
             'contact' => $request->input('contact'), 
             'email' => $request->input('email'), 
             'members' => $request->input('members') ?? '0',
+            'reference' => $referenceid,
             'reg_date' => $date, 
         ]);
         $querygeneral->save();
