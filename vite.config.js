@@ -2,9 +2,24 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
-import ip from 'ip';
+// import ip from 'ip';
 
 export default defineConfig({
+
+    build: {
+        chunkSizeWarningLimit: 1600, // Adjust the limit as necessary
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    // Create separate chunks for node_modules
+                    if (id.includes('node_modules')) {
+                        return id.split('node_modules/')[1].split('/')[0]; // Chunk by package name
+                    }
+                }   
+            }
+        }
+    },
+
     plugins: [
         vue(),
         laravel({
@@ -13,8 +28,8 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
-    server: {
-        host: ip.address(),
-        port: 5713,
-    }
+    // server: {
+    //     host: ip.address(),
+    //     port: 5713,
+    // }
 });
