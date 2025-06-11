@@ -28,8 +28,5 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
-    // server: {
-    //     host: ip.address(),
-    //     port: 5713,
-    // }
+  
 });
