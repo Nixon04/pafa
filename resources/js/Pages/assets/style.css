@@ -290,3 +290,47 @@ video::-webkit-media-controls-time-remaining-display, video::-webkit-media-contr
 }
 
 
+
+/* 
+DashBoard
+*/
+
+.dash-container{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashflex-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+}
+.dash-main{
+    padding: 20px;
+}
+
+.dash-card{
+    min-height: 210px;
+    width: 100%;
+    background: #eee;
+    border-radius: 12px;
+}
+.bash-f1{
+    font-size: 50px;
+    font-weight: bold;
+}
+.dash-card{
+    padding: 20px;
+}
+.bash-circle{
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

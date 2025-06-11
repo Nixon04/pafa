@@ -22,6 +22,10 @@
     width: 90%;
     margin: auto;
 }
+
+.dash-card{
+    padding: 10px;
+}
 }
 
 @media(max-width:500px){

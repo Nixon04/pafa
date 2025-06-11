@@ -59,8 +59,6 @@ class AdminController extends Controller
             $paid = $querygeneral->where('paid',1)->count();
          }
 
-  
-
           return Inertia::render('yakubupafa/home', [
             'data' => $querygeneral,
             'general' => $querygeneral,
