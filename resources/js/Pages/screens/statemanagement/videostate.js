@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { ref, onUnmounted, onMounted, watch } from 'vue';
-import { Toaster, toast } from "@steveyuowo/vue-hot-toast";
 import "@steveyuowo/vue-hot-toast/vue-hot-toast.css";
 
 export const VideoStateManagement = defineStore('main_video', () => {

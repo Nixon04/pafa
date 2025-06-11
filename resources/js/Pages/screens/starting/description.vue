@@ -2,7 +2,6 @@
 import { VideoStateManagement } from '../statemanagement/videostate.js';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';
-import { Toaster, toast } from "@steveyuowo/vue-hot-toast";
 import {Link} from '@inertiajs/inertia-vue3';
 const getstate = (filename) => `/images/${filename}`;
 const getvideo = (filename) => `/video/${filename}`;

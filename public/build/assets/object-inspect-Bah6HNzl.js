@@ -2,3 +2,4 @@ import{g as et,c as _e}from"./@inertiajs-DfUu3uy1.js";const tt={},rt=Object.free
 `)>=0)return!1;return!0}function xe(e,t){var n;if(e.indent==="	")n="	";else if(typeof e.indent=="number"&&e.indent>0)n=u.call(Array(e.indent+1)," ");else return null;return{base:n,prev:u.call(Array(t+1),n)}}function F(e,t){if(e.length===0)return"";var n=`
 `+t.prev+t.base;return n+u.call(e,","+n)+`
 `+t.prev}function M(e,t){var n=P(e),a=[];if(n){a.length=e.length;for(var i=0;i<e.length;i++)a[i]=f(e,i)?t(e[i],e):""}var r=typeof D=="function"?D(e):[],y;if(S){y={};for(var v=0;v<r.length;v++)y["$"+r[v]]=r[v]}for(var o in e)f(e,o)&&(n&&String(Number(o))===o&&o<e.length||S&&y["$"+o]instanceof Symbol||(j.call(/[^\w$]/,o)?a.push(t(o,e)+": "+t(e[o],e)):a.push(o+": "+t(e[o],e))));if(typeof D=="function")for(var s=0;s<r.length;s++)re.call(e,r[s])&&a.push("["+t(r[s])+"]: "+t(e[r[s]],e));return a}return X}export{it as r};
+//# sourceMappingURL=object-inspect-Bah6HNzl.js.map

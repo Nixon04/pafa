@@ -103,7 +103,7 @@ const {
                             <span>Paid</span>
                         </div>
                         <div class="dashhead-value">
-                            <span class="bash-f1">{{paid}}</span>
+                            <span class="bash-f1">{{paid ? '1' : '0'}}</span>
                         </div>
                     </div>
                 </div>

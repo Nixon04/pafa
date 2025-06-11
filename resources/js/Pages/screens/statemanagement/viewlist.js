@@ -14,9 +14,15 @@ export const useList = defineStore('useList', () => {
     const totalUsers = ref(props.totalUsers || '');
 
 
+    console.log('Paid ', paid);
+
+
     const isVisible = ref(false);
     const isLoading = ref(false);
     const viewlists = ref([]);
+
+
+
 
 
     const viewListData = async (item) => {

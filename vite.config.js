@@ -7,6 +7,7 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
 
     build: {
+        sourcemap: true,
         chunkSizeWarningLimit: 1600, // Adjust the limit as necessary
         rollupOptions: {
             output: {
