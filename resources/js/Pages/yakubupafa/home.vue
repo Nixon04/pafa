@@ -1,12 +1,14 @@
 <script setup>
 import NavbarBody from '../assets/components/dash/header.vue';
+import ViewModal from '../assets/components/viewModal.vue';
 import {useTable} from '../screens/statemanagement/table.js';
+import {useList} from '../screens/statemanagement/viewlist.js';
 import { storeToRefs } from 'pinia';
 
 const useTableState = useTable();
 const {
-    data,
-    searchQuery ,
+data,
+searchQuery ,
 rowsPerPage,
 currentPage ,
 dropOption,
@@ -15,21 +17,41 @@ paginatedData,
 noResults,
 } = storeToRefs(useTableState);
 
-
 const {
 prevPage,
 changevaluestate,
 } = useTableState;
 
+
+
+const useViewState = useList();
+
+const {
+    isVisible,
+    viewlists,
+    datacall,
+    general,
+    paid,
+    totalUsers,
+} =  storeToRefs(useViewState);
+
+const {
+    viewListData,
+    UnClickActive,
+} = useViewState;
+
+
 </script>
 
 <template>
     <div>
+        <ViewModal v-if="isVisible" :UnClickActive="UnClickActive" :viewlists="viewlists" :questionsChart="questionsChart"/>
         <NavbarBody/>
         <div class="dash-main">
             <div class="dash-header">
-              <h1>Hey Yakubu</h1>
+              <h1>Hey Yakubu </h1>
             </div>
+
 
             <div class="row gy-1 gx-1">
                 <div class="col-lg-4 col-md-4 col-12">
@@ -45,7 +67,7 @@ changevaluestate,
                             <span>Total Revenue</span>
                         </div>
                         <div class="dashhead-value">
-                            <span class="bash-f1">120,000</span>
+                            <span class="bash-f1">{{paid ?? '0'}}</span>
                         </div>
                     </div>
                 </div>
@@ -63,7 +85,7 @@ changevaluestate,
                             <span>Total Users</span>
                         </div>
                         <div class="dashhead-value">
-                            <span class="bash-f1">120,000</span>
+                            <span class="bash-f1">{{totalUsers}}</span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +103,7 @@ changevaluestate,
                             <span>Paid</span>
                         </div>
                         <div class="dashhead-value">
-                            <span class="bash-f1">120,000</span>
+                            <span class="bash-f1">{{paid}}</span>
                         </div>
                     </div>
                 </div>
@@ -116,16 +138,20 @@ changevaluestate,
                  <thead>
                     <tr>
                     <th>Category Name</th>
-                    <th>Category Item</th>
+                    <th>Phone Contact</th>
+                    <th>Email Address</th>
+                    <th>Members </th>
+                    <th>Issued_date </th>
                     <th>Status</th>
                     <th>Action </th>
+
                     </tr>
                 </thead>
                 <tbody>
 
 
                     <tr v-if="noResults" class="text-center">
-                      <td colspan="9 fw-bold">No Registered Category Found</td>
+                      <td colspan="9 fw-bold">Sorry Pafa Couldn't find any values in respect to your data</td>
                     </tr>
                     <tr v-for="(item, index) in paginatedData" :key="index.id">
                      <td v-if="noResults">No data found  </td>
@@ -140,14 +166,10 @@ changevaluestate,
                         'bg-rx-pending rounded-md p-2': item.paid  == '0'
                       }">{{item.paid == "1" ? "Paid" : "Unpaid"}}</span></td>
 
-                    <!-- :class="{
-                        'position-absolute bg-rx-success rounded-md p-2 shift-call': item.cartstatus == 'Delivered',
-                        'position-absolute bg-rx-pending text-main rounded-md p-2 shift-call opacity-4': item.cartstatus == 'pending',
-                        'position-absolute bg-rx-warning rounded-md p-2 shift-call': item.cartstatus == 'returns',
-                        'position-absolute bg-rx-returns rounded-md p-2 shift-call': item.cartstatus == 'cancelled', --> -->
-
                       <td>
-                        <a @click="DeleteModalButton(item)" class="cursor-pointer"><i class="fa-solid fa-ellipsis"></i></a>
+                        <a @click="viewListData(item)" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M22 10.5V12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2h1.5"/><path d="m16.652 3.455l.649-.649A2.753 2.753 0 0 1 21.194 6.7l-.65.649m-3.892-3.893s.081 1.379 1.298 2.595c1.216 1.217 2.595 1.298 2.595 1.298m-3.893-3.893L10.687 9.42c-.404.404-.606.606-.78.829q-.308.395-.524.848c-.121.255-.211.526-.392 1.068L8.412 13.9m12.133-6.552l-5.965 5.965c-.404.404-.606.606-.829.78a4.6 4.6 0 0 1-.848.524c-.255.121-.526.211-1.068.392l-1.735.579m0 0l-1.123.374a.742.742 0 0 1-.939-.94l.374-1.122m1.688 1.688L8.412 13.9"/></g></svg>
+                        </a>
                       </td>
               </tr>
        </tbody>

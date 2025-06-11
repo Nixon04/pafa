@@ -47,9 +47,6 @@ const filteredData = computed(() => {
     return Math.ceil(filteredData.value.length / rowsPerPage.value);
   });
 
-
-
-
 return {
 data,
 searchQuery ,

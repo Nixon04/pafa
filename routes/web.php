@@ -16,6 +16,7 @@ Route::controller(AllRoutes::class)->group(function(){
 
 Route::controller(AdminController::class)->group(function(){
   Route::get('/yakubupafa/home','Home');
+  Route::post('viewuserslists', 'GetListedMembers');
 });
 
 
