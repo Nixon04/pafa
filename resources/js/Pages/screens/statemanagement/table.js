@@ -1,20 +1,20 @@
 import { defineStore } from "pinia";
-import {ref, computed, onMounted, onUnmounted} from 'vue';
-import {usePage} from  '@inertiajs/vue3';
+import { ref, computed } from "vue";
 
 export const useTable = defineStore('useTable', () => {
+  const data = ref([]);
 
-const {props} = usePage();
-const data = ref(props.data || []);
+  const setData = (newData) => {
+    data.value = newData || [];
+  };
 
-const searchQuery = ref('');
-const rowsPerPage = ref(5); // Default rows per page
-const currentPage = ref(1);
-const dropOption = ref([5, 20, 50, 100]);
-const isLoading = ref(false);
+  const searchQuery = ref('');
+  const rowsPerPage = ref(5);
+  const currentPage = ref(1);
+  const dropOption = ref([5, 20, 50, 100]);
+  const isLoading = ref(false);
 
-
-const filteredData = computed(() => {
+  const filteredData = computed(() => {
     if (!data.value) return data.value;
     if (!searchQuery.value) return data.value;
     return data.value.filter((item) =>
@@ -25,15 +25,20 @@ const filteredData = computed(() => {
   });
 
   const noResults = computed(() => filteredData.value.length === 0);
-  const nextPage = () => {
-    if (currentPage.value < totalPages.value) currentPage.value++;
-  };
 
   const paginatedData = computed(() => {
     const start = (currentPage.value - 1) * rowsPerPage.value;
     const end = start + rowsPerPage.value;
     return filteredData.value.slice(start, end);
   });
+
+  const totalPages = computed(() => {
+    return Math.ceil(filteredData.value.length / rowsPerPage.value);
+  });
+
+  const nextPage = () => {
+    if (currentPage.value < totalPages.value) currentPage.value++;
+  };
 
   const prevPage = () => {
     if (currentPage.value > 1) currentPage.value--;
@@ -43,24 +48,18 @@ const filteredData = computed(() => {
     currentPage.value = 1;
   };
 
-  const totalPages = computed(() => {
-    return Math.ceil(filteredData.value.length / rowsPerPage.value);
-  });
-
-return {
-data,
-searchQuery ,
-rowsPerPage,
-currentPage ,
-dropOption,
-isLoading,
-noResults,
-
-prevPage,
-changevaluestate,
-nextPage,
-paginatedData,
-
-}
-
+  return {
+    data,
+    setData,
+    searchQuery,
+    rowsPerPage,
+    currentPage,
+    dropOption,
+    isLoading,
+    noResults,
+    prevPage,
+    changevaluestate,
+    nextPage,
+    paginatedData,
+  };
 });

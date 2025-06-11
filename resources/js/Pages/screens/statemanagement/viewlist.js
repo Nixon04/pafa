@@ -1,57 +1,50 @@
 import { defineStore } from "pinia";
-import {onMounted, ref} from 'vue';
-import { usePage } from "@inertiajs/vue3";
-import { Toaster, toast } from "@steveyuowo/vue-hot-toast";
+import { ref } from 'vue';
+import { toast } from "@steveyuowo/vue-hot-toast";
 import axios from "axios";
 
- 
 export const useList = defineStore('useList', () => {
-    const {props} = usePage();
+    const datacall = ref([]);
+    const general = ref('');
+    const paid = ref('');
+    const totalUsers = ref('');
 
-    const datacall = ref(props.data || []);
-    const general = ref(props.general || '');
-    const paid = ref(props.paid || '');
-    const totalUsers = ref(props.totalUsers || '');
-
-
-    console.log('Paid ', paid);
-
+    const initFromProps = (first, second, third, forth) => {
+    
+        datacall.value = first || [];
+        general.value = second || '';
+        paid.value = third || '';
+        totalUsers.value = forth || '';
+        console.log('Paid: ', paid);
+    }
 
     const isVisible = ref(false);
     const isLoading = ref(false);
     const viewlists = ref([]);
 
-
-
-
-
     const viewListData = async (item) => {
-
-       const  payload = {
-            'itemvalue' : item,
-        }
+        const payload = { itemvalue: item };
         isVisible.value = true;
-        try{
-       const response = await axios.post('/viewuserslists', payload);
-       if(response.status == 200){
-        viewlists.value = response.data.message;
-        console.log('View List', viewlists);
-        // toast.success('');
-       }else{
-        toast.error('Not successful, please contact developer');
-        console.log('Not successful');
-       } 
-    }catch(e){
-        console.log('error');
-    }
+        try {
+            const response = await axios.post('/viewuserslists', payload);
+            if (response.status === 200) {
+                viewlists.value = response.data.message;
+                console.log('View List', viewlists.value);
+            } else {
+                toast.error('Not successful, please contact developer');
+                console.log('Not successful');
+            }
+        } catch (e) {
+            console.log('Error', e);
+        }
+    };
 
-    }
-
-    const UnClickActive =  () => {
+    const UnClickActive = () => {
         isVisible.value = false;
-    }
+    };
 
     return {
+        initFromProps,
         viewListData,
         UnClickActive,
         isVisible,
@@ -60,10 +53,5 @@ export const useList = defineStore('useList', () => {
         general,
         paid,
         totalUsers,
-
-    }
-
-
+    };
 });
-
-
