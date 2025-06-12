@@ -51,7 +51,7 @@ const getstate = (filename) => `/images/${filename}`;
                     <img :src="getstate('PAFALOGO.png')" alt="_image" class="img-logo">
                   </div>
                   <div @click="ResetQuestion()" class="resetphase">Reset</div>
-                  <div @click="translateToEnglish()" class="resetphase">English</div>
+                  <!-- <div @click="translateToEnglish()" class="resetphase">English</div> -->
               </div>
               <div class="layerbetween layer">
 

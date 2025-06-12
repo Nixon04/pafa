@@ -1,15 +1,16 @@
 <script setup>
-import {SocialState} from '../statemanagement/social.js';
+// import {SocialState} from '../statemanagement/social.js';
 import {storeToRefs} from 'pinia';
 const getstate = (filename) => `/images/${filename}`;
 const getvideo = (filename) => `/video/${filename}`;
 
-const store = SocialState();
+// const store = SocialState();
 const {sociallinks, main} = storeToRefs(store);
 </script>
 
 <template>
-    <div>
+    <div></div>
+    <!-- <div>
         <div class="relative-container">
             <div class="layertop layer d-flex justify-content-between">
                 <div class="logoimg">
@@ -73,5 +74,5 @@ const {sociallinks, main} = storeToRefs(store);
             </div>
         </div>
         <Toaster/>
-    </div>
+    </div> -->
 </template>
